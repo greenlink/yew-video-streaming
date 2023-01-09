@@ -1,0 +1,14 @@
+.grid {
+  display: grid;
+  grid-template-columns: repear(auto-fit, minimax(200px, 1fr));
+}
+
+.consumer {
+  background-color: #0057b7;
+  padding: 10px;
+}
+
+.producer {
+  background-color: #ffd700;
+  padding: 10px;
+}
