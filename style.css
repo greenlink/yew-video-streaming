@@ -1,11 +1,15 @@
 .grid {
   display: grid;
-  grid-template-columns: repear(auto-fit, minimax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .consumer {
   background-color: #0057b7;
   padding: 10px;
+}
+
+.consumer > h3 { 
+  color: white;
 }
 
 .producer {
