@@ -3,7 +3,7 @@ use yew::prelude::*;
 #[function_component(Producer)]
 fn producer() -> Html {
     html!(
-        <div>
+        <div class="producer">
             <h3>{"Producer"}</h3>
         </div>
     )
@@ -12,7 +12,7 @@ fn producer() -> Html {
 #[function_component(Consumer)]
 fn consumer() -> Html {
     html!(
-        <div>
+        <div class="consumer">
             <h3>{"Consumer"}</h3>
         </div>
     )
@@ -21,7 +21,7 @@ fn consumer() -> Html {
 #[function_component(App)]
 fn app() -> Html {
     html!(
-        <div>
+        <div class="grid">
             <Producer/>
             <Consumer/>
         </div>
