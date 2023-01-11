@@ -19,11 +19,18 @@ features = [
   "HtmlVideoElement",
   "MediaDevices", 
   "MediaStream", 
-  "MediaStreamConstraints", 
+  "MediaStreamConstraints",
+  "MediaStreamTrack",
+  "MediaStreamTrackProcessor",
+  "MediaStreamTrackProcessorInit",
   "Navigator",
+  "ReadableStream",
+  "ReadableStreamGetReaderOptions",
+  "ReadableStreamDefaultReader",
   "VideoEncoder",
   "VideoEncoderInit",
   "VideoEncoderConfig",
+  "VideoFrame",
   "VideoTrack"
 ]
 

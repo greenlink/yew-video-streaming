@@ -44,21 +44,48 @@ fn producer() -> Html {
         }) as Box<dyn FnMut(JsValue)>);
 
         let output_handler = Closure::wrap(Box::new(move |chunk: JsValue| {
-            //let video_chunk = chunk.unchecked_into::<EncodedVideoChunk>();
-            console::log_1(&chunk);
+            let video_chunk = chunk.unchecked_into::<EncodedVideoChunk>();
+            console::log_1(&video_chunk);
         }) as Box<dyn FnMut(JsValue)>);
 
         let video_encoder_init = VideoEncoderInit::new(
             error_handler.as_ref().unchecked_ref(),
-            output_handler.as_ref().unchecked_ref()
-        );
-        let video_enconder = VideoEncoder::new(&video_encoder_init);
-        let video_enconder_config = VideoEncoderConfig::new(
+            output_handler.as_ref().unchecked_ref());
+        let video_encoder = VideoEncoder::new(&video_encoder_init).expect("No VideoEncoder Found!!!");
+        let video_encoder_config = VideoEncoderConfig::new(
             &VIDEO_CODEC,
             VIDEO_HEIGHT as u32,
             VIDEO_WIDTH as u32
         );
-
+        video_encoder.configure(&video_encoder_config);
+        let processor = MediaStreamTrackProcessor::new(
+            &MediaStreamTrackProcessorInit::new(
+                &video_track.unchecked_into::<MediaStreamTrack>(),
+            )
+        ).unwrap();
+        let reader = processor
+            .readable()
+            .get_reader()
+            .unchecked_into::<ReadableStreamDefaultReader>();
+        loop {
+            let result = JsFuture::from(reader.read())
+                .await
+                .map_err(|e| {
+                    console::log_1(&e);
+                });
+            match result {
+                Ok(js_frame) => {
+                    let video_frame = Reflect::get(&js_frame, &JsString::from("value"))
+                        .unwrap()
+                        .unchecked_into::<VideoFrame>();
+                    video_encoder.encode(&video_frame);
+                    video_frame.close();
+                }
+                Err(_e) => {
+                    console::log_1(&JsString::from("error"));
+                }
+            }
+        }
     });
 
     html!(
