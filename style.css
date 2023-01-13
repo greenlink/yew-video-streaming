@@ -17,11 +17,15 @@
   padding: 10px;
 }
 
-#webcam {
-  width: 100%;
+video{
+    width: 100%;
+    object-fit: fill;
+    aspect-ratio: auto 1280 / 720;
 }
 
 #render {
   width: 100%;
+  object-fit: fill;
+  aspect-ratio: auto 1280 / 720;
 }
 

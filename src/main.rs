@@ -7,8 +7,8 @@ use wasm_bindgen::{JsCast, prelude::Closure, JsValue};
 use js_sys::*;
 
 static VIDEO_CODEC: &str = "vp09.00.10.08";
-const VIDEO_HEIGHT: i32 = 480i32;
-const VIDEO_WIDTH: i32 = 640i32;
+const VIDEO_HEIGHT: i32 = 720i32;
+const VIDEO_WIDTH: i32 = 1280i32;
 
 #[derive(Clone, Debug, PartialEq)]
 struct EncodedVideoChunkWrapper {
